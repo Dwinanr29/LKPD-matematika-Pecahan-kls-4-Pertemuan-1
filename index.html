@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKPD Interaktif Matematika - Konsep Pecahan</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --secondary: #FFB300;
+            --success: #2ECC71;
+            --background: #FFFDF3;
+            --text: #2C3E50;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Ubuntu', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header, section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 3px solid #E2E8F0;
+        }
+
+        header {
+            border-top: 10px solid var(--primary);
+            text-align: center;
+        }
+
+        h1 { color: var(--primary); margin-bottom: 5px; }
+        h2 { color: var(--primary); border-bottom: 2px dashed var(--secondary); padding-bottom: 5px; }
+        h3 { color: #E67E22; }
+
+        /* Form Identitas */
+        .identity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label { font-weight: bold; margin-bottom: 5px; color: #34495E; }
+        input[type="text"], input[type="number"], textarea {
+            padding: 10px;
+            border: 2px solid #BDC3C7;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Capaian Pembelajaran Box */
+        .info-box {
+            background-color: #EBF5FB;
+            border-left: 5px solid var(--primary);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+        }
+
+        /* Ilustrasi Sederhana dengan CSS */
+        .martabak-circle {
+            width: 150px;
+            height: 150px;
+            background-color: #8B4513;
+            border: 8px solid #CD853F;
+            border-radius: 50%;
+            margin: 20px auto;
+            position: relative;
+            box-shadow: inset 0 0 20px #5c2d0c;
+        }
+
+        .martabak-line {
+            position: absolute;
+            top: 0;
+            left: 74px;
+            width: 4px;
+            height: 150px;
+            background-color: #FFF;
+            display: none;
+        }
+
+        /* Tabel Pengamatan */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 2px solid #BDC3C7;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th { background-color: #F4F6F7; color: var(--text); }
+
+        /* Piko Owl Box */
+        .piko-box {
+            display: flex;
+            align-items: center;
+            background: #FEF9E7;
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .piko-avatar {
+            font-size: 50px;
+            margin-right: 20px;
+        }
+
+        /* Pizza Grid untuk Kuis */
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .pizza-card {
+            background: #F9E79F;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px dashed #F39C12;
+        }
+
+        .fraction-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50px;
+            margin: 10px auto;
+        }
+
+        .fraction-input input {
+            width: 40px;
+            text-align: center;
+            padding: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .fraction-line {
+            width: 45px;
+            height: 3px;
+            background-color: black;
+            margin: 3px 0;
+        }
+
+        /* Checkbox custom style */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+            transform: scale(1.3);
+        }
+
+        /* Tombol Aksi */
+        .btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .btn:hover { background-color: #27AE60; }
+
+        #result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .success-bg { background-color: #D4EFDF; color: #196F3D; border: 2px solid #2ECC71; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>LKPD MATEMATIKA</h1>
+        <h3>Mengingat Kembali Konsep Pecahan</h3>
+        <p style="font-size: 24px; color: var(--secondary); font-weight: bold;">1/8</p>
+        
+        <div class="identity-grid">
+            <div class="form-group">
+                <label>Nama Kelompok:</label>
+                <input type="text" id="nama-kelompok" placeholder="Masukkan nama kelompok...">
+            </div>
+            <div class="form-group">
+                <label>Kelas:</label>
+                <input type="text" id="kelas" placeholder="Contoh: 4-A">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label>Anggota Kelompok:</label>
+                <input type="text" id="anggota" placeholder="Nama anggota dipisahkan koma...">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label>Sekolah:</label>
+                <input type="text" id="sekolah" placeholder="Nama Sekolahmu...">
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <h2>Capaian & Tujuan Pembelajaran</h2>
+        <div class="info-box">
+            <strong>Capaian:</strong> Peserta didik dapat membandingkan dan mengurutkan antar-pecahan dengan pembilang satu dan antar-pecahan dengan penyebut yang sama.
+        </div>
+        <strong>Tujuan Pembelajaran:</strong>
+        <ul>
+            <li>Peserta didik dapat mengidentifikasi makna pembilang dan penyebut pada pecahan dengan tepat.</li>
+            <li>Peserta didik dapat menunjukkan pecahan senilai dengan pembilang satu melalui gambar arsiran secara akurat.</li>
+        </ul>
+        
+        <h3 style="margin-top:20px;">📋 Petunjuk Penggunaan</h3>
+        <ul style="padding-left: 20px;">
+            <li>Bacalah cerita dengan teliti dan bayangkan kejadiannya di dunia nyata!</li>
+            <li>Kerjakan setiap aktivitas secara runtut atau kerjakan yang paling mudah dulu!</li>
+            <li>Diskusikan dengan teman kelompokmu secara sopan untuk mencari jawaban bersama.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Ayo Mengamati! 🥞</h2>
+        <p>Sore ini, Ayah membawa pulang <strong>1 loyang Martabak Manis Cokelat</strong> yang masih utuh berbentuk lingkaran sempurna. Aroma manisnya tercium ke seluruh ruangan! Rian dan adiknya, Sisi, sudah tidak sabar ingin memakannya.</p>
+        <p>Tapi ingat pesan Ayah: <em>"Kalian berdua harus membaginya secara ADIL dan SAMABESAR!"</em></p>
+        
+        <div style="text-align: center;">
+            <p><strong>Ayo Lakukan:</strong> Klik tombol di bawah untuk memotong martabak secara adil menjadi 2 bagian!</p>
+            <button type="button" onclick="potongMartabak()" style="padding: 8px 15px; border-radius: 5px; cursor: pointer;">Tarik Garis Potong ✏️</button>
+            <div class="martabak-circle">
+                <div class="martabak-line" id="garis-martabak"></div>
+            </div>
+        </div>
+
+        <h3 style="margin-top:20px;">🤔 Ayo Berpikir</h3>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label>1. Berapa jumlah semua potongan martabak sekarang?</label>
+            <input type="number" id="ans-martabak" placeholder="... potong" style="width: 120px;">
+        </div>
+        <p><em>*Jangan lupa warnai 1 bagian di bayanganmu sebagai milik Rian!</em></p>
+    </section>
+
+    <section>
+        <h2>Ayo Cari Tahu! 📄</h2>
+        <p>Ikuti petunjuk eksperimen melipat kertas di bawah ini dan isi tabel pengamatannya!</p>
+        <ol>
+            <li>Ambil 2 kertas origami dari gurumu!</li>
+            <li><strong>Kertas A:</strong> Lipat menjadi 2 bagian sama besar, lalu arsir 1 bagiannya.</li>
+            <li><strong>Kertas B:</strong> Lipat menjadi 4 bagian sama besar, lalu arsir 1 bagian saja.</li>
+        </ol>
+
+        <h3>Tabel Pengamatan Lipatan Kertas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pertanyaan Pengamatan</th>
+                    <th>Kertas Origami A</th>
+                    <th>Kertas Origami B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jumlah Seluruh Kotak Hasil Lipatan</td>
+                    <td><input type="number" id="kertasA-total" style="width:60px;"> kotak</td>
+                    <td><input type="number" id="kertasB-total" style="width:60px;"> kotak</td>
+                </tr>
+                <tr>
+                    <td>Jumlah Kotak Lipatan yang Kamu Arsir</td>
+                    <td><input type="number" id="kertasA-arsir" style="width:60px;"> kotak</td>
+                    <td><input type="number" id="kertasB-arsir" style="width:60px;"> kotak</td>
+                </tr>
+                <tr>
+                    <td>Bentuk Lambang Pecahannya</td>
+                    <td>
+                        <div class="fraction-input">
+                            <input type="number" id="kertasA-num">
+                            <div class="fraction-line"></div>
+                            <input type="number" id="kertasA-den">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="fraction-input">
+                            <input type="number" id="kertasB-num">
+                            <div class="fraction-line"></div>
+                            <input type="number" id="kertasB-den">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Ayo Bertanya & Berdiskusi! 🗣️</h2>
+        <p>Setelah melakukan eksperimen melipat kertas tadi, pilih pertanyaan yang membuatmu penasaran (Beri centang):</p>
+        
+        <label class="checkbox-group">
+            <input type="checkbox" name="tanya" value="1"> Mengapa rasa martabak manis yang dibeli ayah sangat enak?
+        </label>
+        <label class="checkbox-group">
+            <input type="checkbox" name="tanya" value="2" id="tanya-target"> Mengapa saat kertas dibagi menjadi lebih banyak ukuran potongannya jadi lebih kecil?
+        </label>
+        
+        <div class="form-group" style="margin-top: 15px;">
+            <label>Apakah kamu punya pertanyaan lain? Tuliskan di sini:</label>
+            <textarea id="pertanyaan-lain" rows="2" placeholder="Pertanyaanku..."></textarea>
+        </div>
+
+        <h3 style="margin-top: 25px;">Ayo Berdiskusi Lengkapi Kata Rahasia!</h3>
+        <p>Perhatikan lambang pecahan pada kertas A yang sudah kamu tulis:</p>
+        <p><strong>1</strong> &larr; Atas<br><strong>2</strong> &larr; Bawah</p>
+        
+        <div class="form-group" style="margin-bottom: 12px;">
+            <label>1. Angka 1 di bagian atas disebut sebagai? Lengkapi kata:</label>
+            <div style="display:flex; align-items:center;">
+                <span style="font-size:18px; font-weight:bold;">PEMBIL</span>
+                <input type="text" id="rahasia-pembilang" style="width: 100px; margin-left:5px;" placeholder="___">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>2. Angka 2 di bagian bawah disebut sebagai? Lengkapi kata:</label>
+            <div style="display:flex; align-items:center;">
+                <span style="font-size:18px; font-weight:bold;">PENYEB</span>
+                <input type="text" id="rahasia-penyebut" style="width: 100px; margin-left:5px;" placeholder="___">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Ayo Menemukan! 🦉</h2>
+        <div class="piko-box">
+            <div class="piko-avatar">🦉</div>
+            <div>
+                <strong>Hallo, kenalkan aku Piko Burung Hantu!</strong>
+                <p style="margin: 5px 0 0 0;">Mari kita kunci ingatan rahasia pecahan kita hari ini!</p>
+            </div>
+        </div>
+        
+        <div style="background: #FFF; border: 2px solid #E2E8F0; padding: 15px; border-radius: 10px; margin-top:15px;">
+            <h4>📌 ATURAN PENTING:</h4>
+            <ul>
+                <li><strong>PEMBILANG</strong> (Angka Atas: Bagian yang diarsir/dimakan)</li>
+                <li><strong>PENYEBUT</strong> (Angka Bawah: Semua potongan yang sama besar)</li>
+            </ul>
+        </div>
+
+        <h3 style="margin-top:25px;">Lengkapi kalimat rumpang di bawah ini:</h3>
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label>1. Pecahan adalah bagian dari sesuatu yang utuh yang dibagi menjadi beberapa bagian yang...</label>
+            <input type="text" id="rumpang-1" placeholder="Jawabanmu (contoh: sama besar)">
+        </div>
+        <div class="form-group">
+            <label>2. Jika aku memotong kue menjadi 3 bagian sama besar dan memakan 1 bagian, nilai pecahannya adalah...</label>
+            <div class="fraction-input" style="margin: 10px 0;">
+                <input type="number" id="rumpang-2-num" placeholder="atas">
+                <div class="fraction-line"></div>
+                <input type="number" id="rumpang-2-den" placeholder="bawah">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Ayo Lakukan: Kuis Sisa Pizza! 🍕</h2>
+        <p>Tulislah lambang pecahan yang sesuai dengan sisa potongan pizza di bawah ini!</p>
+        
+        <div class="pizza-grid">
+            <div class="pizza-card" style="background-color: #EAEDED; border-color: #BDC3C7;">
+                <h4>Pizza A (Contoh)</h4>
+                <p style="font-size:14px; color:#7F8C8D;">Utuh / Sisa Semua</p>
+                <div class="fraction-input">
+                    <input type="number" value="1" disabled>
+                    <div class="fraction-line"></div>
+                    <input type="number" value="1" disabled>
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <h4>Pizza B</h4>
+                <p style="font-size:14px; color:#7F8C8D;">Sisa Setengah (1 dari 2)</p>
+                <div class="fraction-input">
+                    <input type="number" id="pizzaB-num">
+                    <div class="fraction-line"></div>
+                    <input type="number" id="pizzaB-den">
+                </div>
+            </div>
+
+            <div class="pizza-card">
+                <h4>Pizza C</h4>
+                <p style="font-size:14px; color:#7F8C8D;">Sisa Seperempat (1 dari 4)</p>
+                <div class="fraction-input">
+                    <input type="number" id="pizzaC-num">
+                    <div class="fraction-line"></div>
+                    <input type="number" id="pizzaC-den">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button class="btn" onclick="periksaJawaban()">Periksa Jawaban Kelompok 🚀</button>
+
+    <div id="result-box" class="success-bg">
+        <p id="result-text"></p>
+    </div>
+
+</div>
+
+<script>
+    // Fungsi simulasi potong martabak
+    function potongMartabak() {
+        document.getElementById('garis-martabak').style.display = 'block';
+        alert('Sreet! Martabak berhasil dipotong tengah secara adil. Coba isi kolom pertanyaan di bawahnya!');
+    }
+
+    // Fungsi memeriksa semua jawaban LKPD
+    function periksaJawaban() {
+        // Mengambil elemen identitas pelengkap wajib
+        const nama = document.getElementById('nama-kelompok').value.trim();
+        if(!nama) {
+            alert('Jangan lupa isi Nama Kelompokmu terlebih dahulu di bagian atas halaman cover ya!');
+            return;
+        }
+
+        let score = 0;
+        let totalSoal = 11; // Jumlah total poin isian yang divalidasi sistem otomatis
+
+        // 1. Aktivitas Martabak
+        if(document.getElementById('ans-martabak').value == '2') score++;
+
+        // 2. Tabel Kertas A
+        if(document.getElementById('kertasA-total').value == '2') score++;
+        if(document.getElementById('kertasA-arsir').value == '1') score++;
+        if(document.getElementById('kertasA-num').value == '1' && document.getElementById('kertasA-den').value == '2') score++;
+
+        // 3. Tabel Kertas B
+        if(document.getElementById('kertasB-total').value == '4') score++;
+        if(document.getElementById('kertasB-arsir').value == '1') score++;
+        if(document.getElementById('kertasB-num').value == '1' && document.getElementById('kertasB-den').value == '4') score++;
+
+        // 4. Kata Rahasia Diskusi
+        const pembilang = document.getElementById('rahasia-pembilang').value.trim().toUpperCase();
+        const penyebut = document.getElementById('rahasia-penyebut').value.trim().toUpperCase();
+        if(pembilang === 'ANG') score++;
+        if(penyebut === 'UT') score++;
+
+        // 5. Kalimat Rumpang Piko (toleransi input mendekati kata 'sama besar')
+        const rumpang1 = document.getElementById('rumpang-1').value.trim().toLowerCase();
+        if(rumpang1.includes('sama') || rumpang1.includes('adil')) score++;
+
+        // 6. Kuis Pecahan Pizza B & C
+        const pBNum = document.getElementById('pizzaB-num').value;
+        const pBDen = document.getElementById('pizzaB-den').value;
+        const pCNum = document.getElementById('pizzaC-num').value;
+        const pCDen = document.getElementById('pizzaC-den').value;
+
+        if(pBNum == '1' && pBDen == '2') score++;
+        if(pCNum == '1' && pCDen == '4') score++;
+
+        // Menampilkan Hasil Score Evaluasi Akhir
+        const resultBox = document.getElementById('result-box');
+        const resultText = document.getElementById('result-text');
+        
+        resultBox.style.display = 'block';
+        resultText.innerHTML = `Selamat Kelompok "${nama}"! 🎉<br> Kamu telah menyelesaikan LKPD Konsep Pecahan ini dengan hebat.<br> Nilai Skor Aktivitas Mandirimu: ${score} dari ${totalSoal} Poin Tepat Otomatis.<br><br><span style="font-size:16px; font-weight:normal; color:#555;">*Catatan Guru: Untuk isian pertanyaan bebas serta gambaran arsiran bayangan, jawabanmu akan dinilai secara langsung oleh bapak/ibu guru di kelas!</span>`;
+        
+        // Scroll otomatis ke hasil penilaian bawah
+        resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
